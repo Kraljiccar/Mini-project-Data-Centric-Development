@@ -15,9 +15,10 @@ mongo = PyMongo(app)
 def get_tasks():
     return render_template("tasks.html", tasks=mongo.db.tasks.find())
 
-app.route('/add_task')
+@app.route('/add_task')
 def add_task():
-    return render_template('addtask.html')
+    categories = mongo.db.categories.find()
+    return render_template('addtask.html', categories=categories)
 
 
 if __name__ == '__main__':
